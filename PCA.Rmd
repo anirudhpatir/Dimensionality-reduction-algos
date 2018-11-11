@@ -1,8 +1,7 @@
 ---
 title: "PCA"
 output:
-  md_document:
-    variant: markdown_github
+  github_document
 ---
 # Dataset
 ```{r include=FALSE}
