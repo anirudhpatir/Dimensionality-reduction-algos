@@ -85,7 +85,8 @@ annor_pc = data.frame(clus=factor(feature_clus))
 # Plot features, specific to PC 'i'
 pheatmap(pc_data[order(annor_pc$clus),],
          cluster_rows = F,cluster_cols = F,
-         annotation_col = annoc,annotation_row = annor_pc)
+         annotation_col = annoc,annotation_row = annor_pc,
+         scale = "row")
 pc_feature_pos = melt(t(pc_data[rownames(annor_pc),]))
 pc_feature_pos$Var1 = as.numeric(as.factor(pc_feature_pos$Var1))
 a1=ggplot(pc_feature_pos, aes(Var1,value,fill=Var2))+

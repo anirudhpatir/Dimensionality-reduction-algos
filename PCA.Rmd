@@ -107,7 +107,8 @@ annor_pc = data.frame(clus=factor(feature_clus))
 ```{r echo = F, fig.align="center"}
 pheatmap(pc_data[order(annor_pc$clus),],
          cluster_rows = F,cluster_cols = F,
-         annotation_col = annoc,annotation_row = annor_pc)
+         annotation_col = annoc,annotation_row = annor_pc,
+         scale = "row")
 ```
 
 # Plot expression of positive and negatively weighted features
