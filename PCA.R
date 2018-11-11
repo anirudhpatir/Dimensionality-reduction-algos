@@ -67,7 +67,8 @@ ggplot(data.frame(pca$x), aes(PC3,PC5,col=anno$type,shape=anno$cell))+
 pheatmap(exprs(esGolub)[rownames(annor),],
          cluster_rows = F,cluster_cols = F,
          annotation_col = annoc, 
-         annotation_row = annor)
+         annotation_row = annor,
+         scale = "row")
 
 # Correlation between important features, specific to PC 'i'
 i = 1
