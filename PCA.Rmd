@@ -1,8 +1,8 @@
 ---
 title: "PCA"
 output:
-  html_document:
-    df_print: paged
+  md_document:
+    variant: markdown_github
 ---
 # Dataset
 ```{r include=FALSE}
