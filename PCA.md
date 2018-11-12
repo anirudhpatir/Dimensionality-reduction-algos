@@ -29,19 +29,30 @@ Plotting all important features
 
 <img src="PCA_files/figure-markdown_github/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
-Correlation between important features, specific to PC 'i'
-==========================================================
+Plot expression of features for PC1
+===================================
 
-    ## [1] "Features for component: 5"
+    ## [1] "Features for component: 1"
 
 <img src="PCA_files/figure-markdown_github/unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
-Plot expression of features, specific to PC 'i'
-===============================================
-
 <img src="PCA_files/figure-markdown_github/unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
-Plot expression of positive and negatively weighted features
-============================================================
+Plot expression of features for PC2
+===================================
 
 <img src="PCA_files/figure-markdown_github/unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+
+![](PCA_files/figure-markdown_github/unnamed-chunk-10-1.png)
+
+Correlation between important features, specific to PC5
+=======================================================
+
+![](PCA_files/figure-markdown_github/unnamed-chunk-11-1.png)
+
+Expression of features pf PC5
+=============================
+
+![](PCA_files/figure-markdown_github/unnamed-chunk-12-1.png)
+
+![](PCA_files/figure-markdown_github/unnamed-chunk-13-1.png)

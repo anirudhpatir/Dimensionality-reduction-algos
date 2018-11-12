@@ -74,7 +74,7 @@ colnames(annor) = "pc"
 pheatmap(t(pca$x[,1:pca_sig$r]),
          cluster_rows = T,cluster_cols = F,
          annotation_col = annoc)
-ggplot(data.frame(pca$x), aes(PC3,PC5,col=annoc$type,shape=annoc$cell))+
+ggplot(data.frame(pca$x), aes(PC2,PC5,col=annoc$type,shape=annoc$cell))+
   geom_point()+theme_light()
 ```
 
@@ -88,31 +88,73 @@ pheatmap(exprs(esGolub)[rownames(annor),],
          scale = "row")
 ```
 
-# Correlation between important features, specific to PC 'i'
-```{r echo=F, fig.align="center"}
+# Plot expression of features for PC1
+```{r echo = F, fig.align="center"}
+i = 1
+paste("Features for component:",i)
+pc_features = pca_features[[i]]
+pc_data = exprs(esGolub)[pc_features,]
+pheatmap(pc_data,
+         cluster_rows = F,cluster_cols = F,
+         annotation_col = annoc,
+         scale = "row")
+```
+
+```{r echo = F, fig.height = 4, fig.width = 6, fig.align = "center"}
+pc_feature_pos = melt(t(pc_data))
+pc_feature_pos$Var1 = as.numeric(as.factor(pc_feature_pos$Var1))
+ggplot(pc_feature_pos, aes(Var1,value,fill=Var2))+
+  geom_area(show.legend = F)+theme_light()+
+  scale_x_continuous(expand = c(0,0))+scale_y_continuous(expand = c(0,0))
+```
+
+# Plot expression of features for PC2
+```{r echo = F, fig.height = 4, fig.width = 6, fig.align = "center"}
+
+i = 2
+pc_features = pca_features[[i]]
+pc_data = exprs(esGolub)[pc_features,]
+pheatmap(pc_data,
+         cluster_rows = F,cluster_cols = F,
+         annotation_col = annoc,
+         scale = "row")
+```
+
+
+```{r echo = F}
+pc_feature = melt(t(pc_data))
+pc_feature$Var1 = as.numeric(as.factor(pc_feature$Var1))
+ggplot(pc_feature, aes(Var1,value,fill=Var2))+
+  geom_area(show.legend = F)+theme_light()+labs(x = "Index",title="Positive weighted features")+scale_x_continuous(expand = c(0,0))+scale_y_continuous(expand = c(0,0))
+```
+
+# Correlation between important features, specific to PC5
+```{r echo = F}
 # Correlation between important features, specific to PC 'i'
 i = 5
-paste("Features for component:",i)
 pc_features = pca_features[[i]]
 pc_data = exprs(esGolub)[pc_features,]
 pc_features_cor = cor(t(pc_data))
 pc_features_cor[pc_features_cor<=0]=0
 feature_clus = pheatmap(pc_features_cor)
+
 ## Incase positive and negatively weighted features
 feature_clus = cutree(feature_clus$tree_col,k=2)
 annor_pc = data.frame(clus=factor(feature_clus))
 ```
 
-# Plot expression of features, specific to PC 'i'
-```{r echo = F, fig.align="center"}
+
+# Expression of features pf PC5
+```{r echo = F}
+# Plot features, specific to PC 'i'
 pheatmap(pc_data[order(annor_pc$clus),],
          cluster_rows = F,cluster_cols = F,
          annotation_col = annoc,annotation_row = annor_pc,
          scale = "row")
 ```
 
-# Plot expression of positive and negatively weighted features
-```{r echo = F, fig.height = 4, fig.width = 6, fig.align = "center"}
+```{r echo = F}
+## Incase positive and negatively weighted features
 pc_feature_pos = melt(t(pc_data[rownames(annor_pc)[which(annor_pc$clus==1)],]))
 pc_feature_pos$Var1 = as.numeric(as.factor(pc_feature_pos$Var1))
 a1=ggplot(pc_feature_pos, aes(Var1,value,fill=Var2))+
@@ -122,4 +164,6 @@ pc_feature_neg$Var1 = as.numeric(as.factor(pc_feature_neg$Var1))
 a2=ggplot(pc_feature_neg, aes(Var1,value,fill=Var2))+
   geom_area(show.legend = F)+theme_light()+labs(x = "Index",title="Positive weighted features")+scale_x_continuous(expand = c(0,0))+scale_y_continuous(expand = c(0,0))
 grid.arrange(a1,a2)
+
 ```
+
